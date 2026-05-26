@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gustavo — AI-First Product Manager</title>
+  <style>
+    :root {
+      --navy: #002E5D;
+      --royal-blue: #0062B8;
+      --white: #FFFFFF;
+      --surface: #F5F7FA;
+      --text-primary: #1A1A2E;
+      --text-secondary: #7C878E;
+      --border: #C7C9C7;
+      --highlight-bg: #E8EDF5;
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --radius: 8px;
+      --max-width: 800px;
+      --section-gap: 5rem;
+      --font-stack: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font-stack); font-weight: 400; font-size: 1.125rem; line-height: 1.7; color: var(--text-primary); background: var(--white); -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    nav .name { color: var(--white); font-size: 1.25rem; font-weight: 700; text-decoration: none; letter-spacing: -0.01em; }
+    nav .nav-link { color: var(--white); text-decoration: none; font-size: 0.95rem; font-weight: 600; padding: 0.5rem 1.25rem; border: 2px solid rgba(255,255,255,0.3); border-radius: var(--radius); transition: all 0.25s ease; }
+    nav .nav-link:hover { background: var(--royal-blue); border-color: var(--royal-blue); }
+    .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 8rem 2rem 4rem; background: var(--navy); color: var(--white); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,98,184,0.15) 0%, transparent 70%); border-radius: 50%; }
+    .hero::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,98,184,0.1) 0%, transparent 70%); border-radius: 50%; }
+    .hero-content { max-width: var(--max-width); position: relative; z-index: 1; animation: fadeInUp 0.8s ease-out; }
+    .hero h1 { font-size: 2.75rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+    .hero p { font-size: 1.25rem; line-height: 1.6; color: rgba(255,255,255,0.85); max-width: 640px; margin: 0 auto 2.5rem; }
+    .btn-primary { display: inline-block; background: var(--royal-blue); color: var(--white); padding: 0.875rem 2rem; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.25s ease; border: none; cursor: pointer; }
+    .btn-primary:hover { background: #004d91; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,98,184,0.3); }
+    .proof-strip { background: var(--highlight-bg); padding: 3rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .proof-strip-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+    .proof-item { text-align: center; flex: 1; min-width: 140px; }
+    .proof-stat { font-size: 1.1rem; font-weight: 700; color: var(--navy); line-height: 1.3; }
+    .proof-label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    section { padding: var(--section-gap) 2rem; }
+    .section-inner { max-width: var(--max-width); margin: 0 auto; }
+    .section-title { font-size: 1.75rem; font-weight: 700; color: var(--navy); margin-bottom: 2.5rem; letter-spacing: -0.01em; }
+    .projects { background: var(--surface); }
+    .project-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 2.5rem; margin-bottom: 2rem; transition: box-shadow 0.25s ease, transform 0.25s ease; opacity: 0; animation: fadeInUp 0.6s ease-out forwards; }
+    .project-card:nth-child(2) { animation-delay: 0.1s; }
+    .project-card:nth-child(3) { animation-delay: 0.25s; }
+    .project-card:nth-child(4) { animation-delay: 0.4s; }
+    .project-card:last-child { margin-bottom: 0; }
+    .project-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .project-card h3 { font-size: 1.35rem; font-weight: 700; color: var(--navy); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--highlight-bg); }
+    .project-detail { margin-bottom: 1.25rem; }
+    .project-detail:last-child { margin-bottom: 0; }
+    .project-detail-label { font-weight: 700; color: var(--navy); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.25rem; }
+    .project-detail p { color: var(--text-primary); line-height: 1.7; }
+    .pov { background: var(--white); }
+    .pov-text { font-size: 1.15rem; line-height: 1.8; color: var(--text-primary); max-width: 720px; }
+    footer { background: var(--navy); color: var(--white); padding: 4rem 2rem; text-align: center; }
+    .footer-inner { max-width: var(--max-width); margin: 0 auto; }
+    footer p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 2rem; color: rgba(255,255,255,0.85); }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .contact-link { color: var(--white); text-decoration: none; font-size: 1rem; font-weight: 600; padding: 0.75rem 1.5rem; border: 2px solid rgba(255,255,255,0.3); border-radius: var(--radius); transition: all 0.25s ease; }
+    .contact-link:hover { background: var(--royal-blue); border-color: var(--royal-blue); }
+    .footer-note { margin-top: 3rem; font-size: 0.85rem; color: rgba(255,255,255,0.4); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 768px) { nav { padding: 0.875rem 1.25rem; } nav .name { font-size: 1.1rem; } nav .nav-link { font-size: 0.85rem; padding: 0.4rem 1rem; } .hero { min-height: 70vh; padding: 7rem 1.5rem 3rem; } .hero h1 { font-size: 1.85rem; } .hero p { font-size: 1.05rem; } .proof-strip-inner { flex-direction: column; gap: 1.25rem; } section { padding: 3.5rem 1.5rem; } .section-title { font-size: 1.5rem; } .project-card { padding: 1.75rem; } .project-card h3 { font-size: 1.2rem; } .contact-links { flex-direction: column; align-items: center; gap: 1rem; } }
+    @media (max-width: 480px) { .hero h1 { font-size: 1.6rem; } .hero p { font-size: 1rem; } .project-card { padding: 1.5rem; } body { font-size: 1rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="name">Gustavo</a>
+    <a href="#contact" class="nav-link">Get in touch</a>
+  </nav>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>AI-First Product Manager</h1>
+      <p>I use AI to ship more and go deeper — understand customers better, build faster, and deliver at a pace most teams didn't think was possible.</p>
+      <a href="#contact" class="btn-primary">Get in touch</a>
+    </div>
+  </header>
+  <div class="proof-strip">
+    <div class="proof-strip-inner">
+      <div class="proof-item"><div class="proof-stat">6-8 hrs → 1 hr</div><div class="proof-label">Report time</div></div>
+      <div class="proof-item"><div class="proof-stat">15 min</div><div class="proof-label">Custom demos</div></div>
+      <div class="proof-item"><div class="proof-stat">+8%</div><div class="proof-label">Renewal rate</div></div>
+      <div class="proof-item"><div class="proof-stat">+3 clients</div><div class="proof-label">Per PM</div></div>
+      <div class="proof-item"><div class="proof-stat">1 week</div><div class="proof-label">AI roadmap built</div></div>
+    </div>
+  </div>
+  <section class="projects">
+    <div class="section-inner">
+      <h2 class="section-title">What I've Built</h2>
+      <article class="project-card">
+        <h3>AI Feature Request Pipeline</h3>
+        <div class="project-detail"><div class="project-detail-label">The Problem</div><p>After rolling out Claude company-wide, everyone started building their own skills — but without coordination. Skills weren't branded, broke when shared because not everyone had the latest version, and people were unknowingly duplicating each other's work. There was no system to capture, evaluate, or prioritize what got built.</p></div>
+        <div class="project-detail"><div class="project-detail-label">What I Built</div><p>A two-part AI system. First, an intake agent that interviews any team member who has an idea — it searches all existing skills for matches, runs a structured discovery interview to understand the job to be done, and posts a summary to Slack for company-wide visibility. Second, an autonomous PRD writer that picks up each request and instantly generates a scored, structured PRD — no human input required.</p></div>
+        <div class="project-detail"><div class="project-detail-label">Key Decision</div><p>Centralizing all skills in a shared repo so every department always has the latest version, and building a registry of README files so the AI itself knows what already exists before anyone starts building something new.</p></div>
+        <div class="project-detail"><div class="project-detail-label">Result</div><p>Built the company's AI product roadmap for the next year within a week. PRDs that used to require multiple interviews and manual write-ups now generate instantly. The Slack-first visibility means the whole company weighs in with context, which means less discovery time and faster shipping.</p></div>
+      </article>
+      <article class="project-card">
+        <h3>Sales Demo Builder</h3>
+        <div class="project-detail"><div class="project-detail-label">The Problem</div><p>Every prospect saw the same generic demo with hand-built synthetic data. Nothing was tailored to their industry, competitors, or pain points — so prospects had to imagine how the platform would work for them instead of seeing it.</p></div>
+        <div class="project-detail"><div class="project-detail-label">What I Built</div><p>A modular AI skill suite that generates a fully personalized demo environment in 15 minutes — complete with realistic win-loss transcripts, decision driver scores, HTML summaries, and a platform-ready CSV. It pulls from the web, Gong, and Salesforce to build synthetic data that actually mirrors the prospect's world.</p></div>
+        <div class="project-detail"><div class="project-detail-label">Key Decision</div><p>Designing the whole system around constraints — keeping it token-efficient enough for Sonnet 4.6, simple enough that non-technical sales reps could import results themselves without an API, and precise enough in transcript length and CSV formatting that the platform would accept everything cleanly on the first try. A lot of engineering went into making it feel effortless.</p></div>
+        <div class="project-detail"><div class="project-detail-label">Result</div><p>Sales leadership projects 5x sales impact. Multiple prospects have already reached out excited to explore their custom demo environment — before signing a deal.</p></div>
+      </article>
+      <article class="project-card">
+        <h3>Win-Loss Report Builder</h3>
+        <div class="project-detail"><div class="project-detail-label">The Problem</div><p>Program managers each handle ~15 clients and spent 6-8 hours building a single quarterly report deck per client. The work required reading every interview, finding trends, comparing to last quarter's findings, aligning to the client's current goals, and assembling a MECE narrative across slides. You can't spend 20 hours on one deck, but you also can't shortcut the analysis without risking your credibility with the client.</p></div>
+        <div class="project-detail"><div class="project-detail-label">What I Built</div><p>An AI skill that profiles the raw win-loss data, synthesizes insights in two passes, and builds a full branded slide deck. But the key: it doesn't just spit out a finished product. It walks the PM through its analysis conversationally — defending its findings, answering pushback, and letting the PM shape the narrative before a single slide is generated.</p></div>
+        <div class="project-detail"><div class="project-detail-label">Key Decision</div><p>Building a collaborative loop instead of a black box. PMs were scarred by hallucination issues with other AI tools and wouldn't trust a report they couldn't verify. So I designed the skill to show its work, take pushback, and let the PM confirm every number and insight before it hits slides. The report takes an hour instead of 10 minutes — but the PM ships it with full confidence.</p></div>
+        <div class="project-detail"><div class="project-detail-label">Result</div><p>Report time dropped from 6-8 hours to 1 hour. PMs now carry 3 more clients on average. Renewal rates improved 8% because clients get monthly decks instead of quarterly. And it's spawned an on-demand reporting feature where clients can pull their own reports directly from the platform.</p></div>
+      </article>
+    </div>
+  </section>
+  <section class="pov">
+    <div class="section-inner">
+      <h2 class="section-title">How I Think</h2>
+      <p class="pov-text">As a PM, I have always felt like a jack of all trades, master of none. I knew enough about code to converse with engineers, enough about design to have taste, but not enough of either to actually make something. That's how I felt, until AI changed everything. Now I can prototype something in a day, not a sprint. I can ship ideas that would've sat in a backlog forever. I can put something real in front of a customer before my engineers even start. And getting it in front of users early is the thing I care about most. I've put real work into features that nobody used because I didn't involve the customer soon enough. That lesson stuck. I still build for people — but I keep them in the room the whole way, adjusting not just what gets built but how it works in their hands.</p>
+    </div>
+  </section>
+  <footer id="contact">
+    <div class="footer-inner">
+      <p>If any of this sounds like a problem you're trying to solve, I'd love to talk.</p>
+      <div class="contact-links">
+        <a href="mailto:[email]" class="contact-link">[email]</a>
+        <a href="tel:[phone]" class="contact-link">[phone]</a>
+      </div>
+      <div class="footer-note">Built with Claude</div>
+    </div>
+  </footer>
+</body>
+</html>
